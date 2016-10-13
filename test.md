@@ -15,7 +15,7 @@ variable         | description
 ###Getting and Cleaning Data Course Project
 ##Purpose
 
-This project requires the student to read text files into R dataframes, to analyze data structures, to determine intermediate concatenation and merge operations, and to demonstrate other fundamental operations required to scrub a large data set.  The deliverable is two tidy datasets ready for downstream analysis.
+This project requires the student to read text files into R dataframes, to analyze data structures, to determine intermediate concatenation and merge operations, and to demonstrate other fundamental operations required to scrub a large data set.  The deliverable is two tidy datasets ready for downstream analysis with documentation as described below.
 
 ##Submission summary
 
@@ -28,28 +28,36 @@ This project requires the student to read text files into R dataframes, to analy
 	- Extraction of only the mean and standard deviation figures for each measurement
 	- Application of descriptive names and labels for activities and variable names in accord with tidy data principles
 
-4.  `average.data.txt`, a second independent tidy data set, derived from `merged dataset.txt` (data set described above) in which the average of each variable by activity and by subject is calculated.
+4.  `average.data.txt`, a second independent tidy data set, derived from `merged dataset.txt`, the data set described previously, in which the average of each variable by activity and by subject is calculated.
 
-5.  `codebook.md`, the project code book that describes variables, their units, and other data information in fashion similar to the codebook provided with the source data
+5.  `codebook.md`, that describes variables, their units, and other data information in fashion similar to the codebook provided with the source data
 
 6.  a link to the Github repository containing all project files listed here.
 
-##Objectives
+##run_analysis.R user notes
 
-run_analysis.R performs the following:
+Before the reader may execute `run_analysis.R` # some simple modifications are required in the text of `run_analysis.R`.  Specifically, the user should copy `run_analysis.R` to desired directory and edit the working directory (line 2) to suit the local environment.  This is accomplished by either:
 
-Merges the training and the test sets to create one data set.
-Extracts only the measurements on the mean and standard deviation for each measurement.
-Uses descriptive activity names to name the activities in the data set
-Appropriately labels the data set with descriptive activity names.
-Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-run_analysis.R
+	Opening `run_analysis.R` with a text editor to modify the working directory path before loading in R
+	Opening the file in RStudio, changing directories in the IDE, then selecting all the code in the `run_analysis.R` window, then clicking on the "Run" button
 
-It downloads the UCI HAR Dataset data set and puts the zip file working directrory. After it is downloaded, it unzips the file into the UCI HAR Dataset folder.
-It loads the train and test data sets and appends the two datasets into one data frame. This is done using rbind.
-It extracts just the mean and standard deviation from the features data set. This is done using grep.
-After cleaning the column names, these are applied to the x data frame.
-After loading activities data set, it converts it to lower case using tolower and removes underscore using gsub. activity and subject column names are named for y and subj data sets, respectively.
-The three data sets, x, y and subj, are merged. Then, it is exported as a txt file into the Project folder in the same working directory, named merged.txt.
-The mean of activities and subjects are created into a separate tidy data set which is exported into the Project folder as txt file; this is named average.txt.
-The R code contains str for easier preview of the two final data sets.
+##run_analysis.R functional description
+
+#run_analysis.R provides the following in sequence:
+
+-Sets working directory to suit local environment for the required file download
+-Defines the function `read_concat()`, which will be used to read and concatenate "training" and "test" files for subjects, activities, and measurement data.
+-Downloads the .zip archive found at the specified URL
+-Unzips the .zip file to the working directory under the folder "./UCI HAR Dataset"
+-Deletes both "Inertial Signals" directories, which contain files from the .zip archive not needed for the analysis
+-Calls `read_concat()` three times to read and concatenate training and test files for subjects, activities, and measurement data.
+-Modifies column headings as needed, and checks that the row dimension for all three dataframes, which must be identical.
+-Adds descriptive variable names from the features text file from the .zip archive.  The term "features" is used to describe the measurement variable names.
+-Extracts only the mean() and sd() feature parameter types into a new intermediate dataframe, verifies that the names within are as expected, then proceeds to cleanup many of the measurement variable names with numerous regular expression scans.
+	-All are converted to lower case
+	-Patterns matching c("()-x", "()-y", "()-z", "-std\\(\\)", "-mean\\(\\)" ) are replaced with c("(x)", "(y)", "(z)", "-std", "-mean")
+-Reads activity labels file (from .zip archive) and relabels activity labels with descriptive variable names to comply with tidy data norms
+-Creates the first dataset `data` with a merge of the separate subjects vector, activities vector, and the intermediate data set
+-Writes the first dataset `data` to the working directory as "merged dataset.txt", a space-delimited ASCII text file.
+-Generate the second dataset from the first dataset (`data`) by calculating measurement averages by subject, by activity, and merging with subject and activity columns.
+-As a final step, writes the second dataset `average.data` to the working directory as "average.data.txt", a space-delimited ASCII text file.
