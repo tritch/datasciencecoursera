@@ -25,8 +25,8 @@ This project requires the student to read text files into R dataframes, to analy
 
 3.  The first data set:  `merged dataset.txt`, a tidy data set created from a merge of the training and the test sets and the following processing steps:
 
-- Extraction of only the mean and standard deviation figures for each measurement
-- Application of descriptive names and labels for activities and variable names in accord with tidy data principles
+	- Extraction of only the mean and standard deviation figures for each measurement
+	- Application of descriptive names and labels for activities and variable names in accord with tidy data principles
 
 4.  `average.data.txt`, a second independent tidy data set, derived from `merged dataset.txt`, the data set described previously, in which the average of each variable by activity and by subject is calculated.
 
