@@ -17,7 +17,7 @@ variable         | description
 
 This project requires the student to read text files into R dataframes, to analyze data structures, to determine intermediate concatenation and merge operations, and to demonstrate other fundamental operations required to scrub a large data set.  The deliverable is two tidy datasets ready for downstream analysis.
 
-##Submission summary
+##Project submission summary
 
 1.  This `README.md` file that explains the scope of the project and summarizes the analysis
 
@@ -34,7 +34,7 @@ This project requires the student to read text files into R dataframes, to analy
 
 6.  a link to the Github repository containing all project files listed here.
 
-##Objectives
+##run_analysis.R functional description
 
 run_analysis.R performs the following:
 
