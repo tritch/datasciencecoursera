@@ -38,8 +38,8 @@ This project requires the student to read text files into R dataframes, to analy
 
 Before the reader may execute `run_analysis.R` some simple modifications are required in the text of `run_analysis.R`.  Specifically, the user should copy `run_analysis.R` to desired directory and edit the working directory (line 2) to suit the local environment.  This is accomplished by either:
 
-	Opening `run_analysis.R` with a text editor to modify the working directory path before loading in R
-	Opening the file in RStudio, changing directories in the IDE, then selecting all the code in the `run_analysis.R` window, then clicking on the "Run" button
+	~ Opening `run_analysis.R` with a text editor to modify the working directory path before loading in R
+	~ Opening the file in RStudio, changing directories in the IDE, then selecting all the code in the `run_analysis.R` window, then clicking on the "Run" button
 
 ##run_analysis.R functional description
 
@@ -47,8 +47,7 @@ Before the reader may execute `run_analysis.R` some simple modifications are req
 
 - Sets working directory to suit local environment for the required file download
 - Defines the function `read_concat()`, which will be used to read and concatenate "training" and "test" files for subjects, activities, and measurement data.
-- Downloads the .zip archive found at the specified URL
-- Unzips the .zip file to the working directory under the folder "./UCI HAR Dataset"
+- Downloads the .zip archive found at the specified URL, and unzips it to the working directory under the folder "./UCI HAR Dataset"
 - Deletes both "Inertial Signals" directories, which contain files from the .zip archive not needed for the analysis
 - Calls `read_concat()` three times to read and concatenate training and test files for subjects, activities, and measurement data.
 - Modifies column headings as needed, and checks that the row dimension for all three dataframes, which must be identical.
@@ -61,6 +60,10 @@ Before the reader may execute `run_analysis.R` some simple modifications are req
 - Writes the first dataset `data` to the working directory as "merged dataset.txt", a space-delimited ASCII text file.
 - Generate the second dataset from the first dataset (`data`) by calculating measurement averages by subject, by activity, and merging with subject and activity columns.
 - As a final step, writes the second dataset `average.data` to the working directory as "average.data.txt", a space-delimited ASCII text file.
+
+
+
+
 
 
 
